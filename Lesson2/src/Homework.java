@@ -14,7 +14,7 @@ public class Homework {
      * 2. (optional) if sum of a and b is more then int can store -- return -1;
      **/
     public static int sum(int a, int b) {
-        return a + b;
+        return 0;
     }
 
     /**
