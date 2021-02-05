@@ -3,24 +3,25 @@ package com.home.model;
 import java.util.Random;
 
 public class Person {
+    public static final String MALE = "male";
+    public static final String FEMALE = "female";
+
     private Address address;
     private int age;
     private String name;
-    private int height;
+    //enum is definitely the better option here
+    private String sex = FEMALE;
 
     public Person() {
     }
 
-    public Person(int age, String name, int height) {
-        this(age, name);
-        this.height = height;
-    }
-
-    public Person(int age, String name) {
-        this();
-        this.height = 180;
+    public Person(Address address, int age, String name, String sex) {
+        this.address = address;
         this.age = age;
         this.name = name;
+        if (MALE.equals(sex) || FEMALE.equals(sex)) {
+            this.sex = sex;
+        }
     }
 
     public void info() {
@@ -62,13 +63,7 @@ public class Person {
         this.name = name;
     }
 
-    public int getHeight() {
-        return height;
+    public String getSex() {
+        return sex;
     }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-
 }

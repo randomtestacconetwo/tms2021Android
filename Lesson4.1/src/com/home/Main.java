@@ -8,36 +8,28 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Person konstantin = new Person(30, "Konstantin");
         Address konstantinsAddress = new Address("Belarus", "Vitebsk");
-        konstantin.setAddress(konstantinsAddress);
-//        konstantin.info();
+        Person konstantin = new Person(konstantinsAddress, 20, "Konstantin", Person.MALE);
 
-        Person gleb = new Person(40, "Gleb", 190);
         Address glebsAddress = new Address("Belarus", "Vitebsk");
-        gleb.setAddress(glebsAddress);
-//        gleb.info();
+        Person gleb = new Person(glebsAddress, 25, "Gleb", Person.MALE);
 
-        Person oleg = new Person(38, "Oleg", 189);
         Address olegsAddress = new Address("Belarus", "Braslav");
-        oleg.setAddress(olegsAddress);
+        Person oleg = new Person(olegsAddress, 38, "Oleg", Person.MALE);
 
-        Person vadim = new Person(30, "Vadim", 180);
         Address vadimsAddress = new Address("Belarus", "Smorgon'");
-        vadim.setAddress(vadimsAddress);
+        Person vadim = new Person(vadimsAddress, 27, "Vadim", Person.MALE);
 
-        PersonRegistry registry = new PersonRegistry(new Person[]{gleb, konstantin, oleg, vadim});
+        Address olgasAddress = new Address("Belarus", "Vitebsk'");
+        Person olga = new Person(olgasAddress, 20, "Olga", Person.FEMALE);
+
+        PersonRegistry registry = new PersonRegistry(new Person[]{gleb, konstantin, oleg, vadim, olga});
 
         System.out.println(registry.countPeople(new Address("Belarus", "Vitebsk")));
         System.out.println(registry.countPeople(new Address("Belarus", "Krarow")));
         System.out.println(registry.countPeople("Belarus"));
 
-
-        List<Person> personList = registry.getPeople(new Address("Belarus", "Vitebsk"));
-        for (Person person : personList) {
-            System.out.println(person.getName());
-        }
-
-    }
+        MilitaryOffice office = new MilitaryOffice(registry);
+        List<Person> fitPeople = office.getFitPeople(new Address("Belarus", "Vitebsk")); }
 
 }
