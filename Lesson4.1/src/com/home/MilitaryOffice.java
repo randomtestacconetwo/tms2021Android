@@ -10,9 +10,11 @@ import static com.home.model.Person.MALE;
 
 public class MilitaryOffice {
     private final PersonRegistry registry;
+    private final MilitaryUnit[] units;
 
-    public MilitaryOffice(PersonRegistry registry) {
+    public MilitaryOffice(PersonRegistry registry, MilitaryUnit[] units) {
         this.registry = registry;
+        this.units = units;
     }
 
     public List<Person> getFitPeople(Address address) {
@@ -25,6 +27,37 @@ public class MilitaryOffice {
             }
         }
         return fitPeople;
+    }
+
+    public void addFitPeopleToTheUnits(Address address) {
+        List<Person> fitPeople = getFitPeople(address);
+        int unitIndex = 0;
+        MilitaryUnit unit;
+        for (Person person : fitPeople) {
+            boolean personSentToUnit;
+            do {
+                unit = units[unitIndex];
+//                personSentToUnit = unit.addRecruitToList(person);
+                personSentToUnit = unit.addRecruitToArray(person);
+                //unit is full, try next one
+                if (!personSentToUnit) {
+                    unitIndex++;
+                }
+            } while (!personSentToUnit && unitIndex < units.length);
+            if (unitIndex == units.length) {
+                System.out.println("All units are full");
+                return;
+            }
+        }
+    }
+
+    public int getCapacity() {
+        int sum = 0;
+        for (MilitaryUnit unit : units) {
+//            sum += unit.getFreePlaces();
+            sum += unit.getFreePlacesFromArray();
+        }
+        return sum;
     }
 
     private boolean isPersonFit(Person person) {

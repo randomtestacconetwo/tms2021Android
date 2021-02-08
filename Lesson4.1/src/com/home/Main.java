@@ -3,9 +3,6 @@ package com.home;
 import com.home.model.Address;
 import com.home.model.Person;
 
-import java.util.List;
-
-
 public class Main {
     public static void main(String[] args) {
         Address konstantinsAddress = new Address("Belarus", "Vitebsk");
@@ -25,11 +22,11 @@ public class Main {
 
         PersonRegistry registry = new PersonRegistry(new Person[]{gleb, konstantin, oleg, vadim, olga});
 
-        System.out.println(registry.countPeople(new Address("Belarus", "Vitebsk")));
-        System.out.println(registry.countPeople(new Address("Belarus", "Krarow")));
-        System.out.println(registry.countPeople("Belarus"));
-
-        MilitaryOffice office = new MilitaryOffice(registry);
-        List<Person> fitPeople = office.getFitPeople(new Address("Belarus", "Vitebsk")); }
+        MilitaryOffice office = new MilitaryOffice(registry,
+                new MilitaryUnit[]{new MilitaryUnit(1), new MilitaryUnit(0)});
+        System.out.println(office.getCapacity());
+        office.addFitPeopleToTheUnits(new Address("Belarus", "Vitebsk"));
+        System.out.println(office.getCapacity());
+    }
 
 }
