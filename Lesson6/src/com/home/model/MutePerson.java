@@ -1,14 +1,12 @@
 package com.home.model;
 
 import com.home.exceptions.CantSpeakException;
+import com.home.exceptions.InvalidNameSurnameException;
 
 public class MutePerson extends Person {
 
-    public MutePerson() {
-    }
-
-    public MutePerson(Address address, int age, String name, String sex) {
-        super(address, age, name, sex);
+    public MutePerson(Address address, int age, String name, String surname, String sex) throws InvalidNameSurnameException {
+        super(address, age, name, surname, sex);
     }
 
     @Override

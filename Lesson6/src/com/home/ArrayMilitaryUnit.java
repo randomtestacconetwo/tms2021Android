@@ -23,7 +23,12 @@ public class ArrayMilitaryUnit extends MilitaryUnit {
 
     @Override
     protected Person[] getRecruits() {
-        return recruits;
+        Person[] realRecruits = new Person[takenPlacesCount];
+        if (takenPlacesCount >= 0) {
+            // Array recruits can contain null so copy only real recruits
+            System.arraycopy(recruits, 0, realRecruits, 0, takenPlacesCount);
+        }
+        return realRecruits;
     }
 
     @Override
