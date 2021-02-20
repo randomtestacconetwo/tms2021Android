@@ -1,6 +1,7 @@
 package com.home.model;
 
 import com.home.exceptions.CantSpeakException;
+import com.home.exceptions.InvalidNameSurnameException;
 
 import java.util.Random;
 
@@ -10,24 +11,21 @@ public class Person implements Speaker, Cloneable {
 
     private Address address;
     private int age;
-    private String name;
+    private final String name;
+    private final String surname;
     //enum is definitely the better option here
     private String sex = FEMALE;
 
-    public Person() {
-    }
-
-    public Person(Address address, int age, String name, String sex) {
+    public Person(Address address, int age, String name, String surname, String sex) throws InvalidNameSurnameException {
         this.address = address;
         this.age = age;
-        this.name = name;
+        this.name = beautifyNameSurname(name);
+        this.surname = beautifyNameSurname(surname);
+        validateNameSurname(name);
+        validateNameSurname(surname);
         if (MALE.equals(sex) || FEMALE.equals(sex)) {
             this.sex = sex;
         }
-    }
-
-    public static void personTest() {
-        System.out.println("I am person");
     }
 
     public void speak() throws CantSpeakException {
@@ -37,7 +35,6 @@ public class Person implements Speaker, Cloneable {
         } else {
             secureInfo();
         }
-//        System.out.println("I am living in " + address.toString());
     }
 
     private void secureInfo() {
@@ -65,8 +62,8 @@ public class Person implements Speaker, Cloneable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getSurname() {
+        return surname;
     }
 
     public String getSex() {
@@ -78,5 +75,16 @@ public class Person implements Speaker, Cloneable {
         Person clone = (Person) super.clone();
         clone.address = address.clone();
         return clone;
+    }
+
+    private String beautifyNameSurname(String name) {
+        name = name.trim().toLowerCase();
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
+
+    private void validateNameSurname(String name) throws InvalidNameSurnameException {
+        if (name.contains(" ")) {
+            throw new InvalidNameSurnameException();
+        }
     }
 }

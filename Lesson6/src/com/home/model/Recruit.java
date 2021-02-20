@@ -1,13 +1,12 @@
 package com.home.model;
 
+import com.home.exceptions.InvalidNameSurnameException;
+
 public class Recruit extends Person {
     private String title;
 
-    public Recruit() {
-    }
-
-    public Recruit(Address address, int age, String name, String sex, String title) {
-        super(address, age, name, sex);
+    public Recruit(Address address, int age, String name, String surname, String sex, String title) throws InvalidNameSurnameException {
+        super(address, age, name, surname, sex);
         this.title = title;
     }
 

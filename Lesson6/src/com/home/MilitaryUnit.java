@@ -2,6 +2,8 @@ package com.home;
 
 import com.home.model.Person;
 
+import java.util.Arrays;
+
 public abstract class MilitaryUnit {
     private static int unitNumberCounter = 0;
     private final int capacity;
@@ -40,8 +42,14 @@ public abstract class MilitaryUnit {
     }
 
     public void printRecruits() {
-        for (Person person : getRecruits()) {
-            System.out.println(person.getName());
+        if (getRecruits().length == 0) {
+            System.out.println("Military Unit number " + unitNumber + " is empty");
+            return;
+        }
+        System.out.println("Military Unit number " + unitNumber + " recruits:");
+        int i = 1;
+        for (String nameSurname : getSortedRecruitsNames()) {
+            System.out.printf("%s. %s\n", i++, nameSurname);
         }
     }
 
@@ -49,6 +57,15 @@ public abstract class MilitaryUnit {
         return capacity;
     }
 
+    private String[] getSortedRecruitsNames() {
+        String[] names = new String[getRecruits().length];
+        int i = 0;
+        for (Person p : getRecruits()) {
+            names[i++] = p.getSurname() + " " + p.getName();
+        }
+        Arrays.sort(names);
+        return names;
+    }
 
     public abstract int getFreePlaces();
 

@@ -50,6 +50,12 @@ public class MilitaryOffice {
         }
     }
 
+    public void printRecruits() {
+        for (MilitaryUnit u : units) {
+            u.printRecruits();
+        }
+    }
+
     public int getCapacity() {
         int sum = 0;
         for (MilitaryUnit unit : units) {
