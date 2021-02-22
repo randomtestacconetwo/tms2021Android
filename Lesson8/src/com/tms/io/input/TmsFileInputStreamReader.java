@@ -34,6 +34,7 @@ public class TmsFileInputStreamReader implements TmsReader {
     @Override
     public byte[] readAll() throws IOException {
         try (FileInputStream stream = new FileInputStream(inputFilePath)) {
+//            asdads
 //            the same thing
 //            return stream.readAllBytes();
             byte[] buffer = new byte[stream.available()];
