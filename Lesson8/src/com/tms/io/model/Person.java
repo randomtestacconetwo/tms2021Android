@@ -9,9 +9,10 @@ public class Person implements Cloneable, Serializable {
     private Address address;
     private int age;
     private String name;
-    private String surname;
+    private transient String surname;
     //enum is definitely the better option here
     private String sex = FEMALE;
+    private transient int addressReqeustCount = 0;
 
     public Person() {
     }
@@ -27,6 +28,7 @@ public class Person implements Cloneable, Serializable {
     }
 
     public Address getAddress() {
+        addressReqeustCount++;
         return address;
     }
 
