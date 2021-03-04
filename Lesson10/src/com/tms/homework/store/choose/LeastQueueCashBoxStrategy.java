@@ -1,0 +1,20 @@
+package com.tms.homework.store.choose;
+
+import com.tms.homework.store.CashBox;
+
+public class LeastQueueCashBoxStrategy implements ChooseCashBoxStrategy {
+
+    @Override
+    public CashBox chooseCashBox(String buyerName, CashBox[] cashBoxes) {
+        System.out.println(buyerName + " picking CashBox by comparing queues size");
+        int min = Integer.MAX_VALUE;
+        CashBox minBox = null;
+        for (CashBox box : cashBoxes) {
+            if (box.getQueueSize() < min) {
+                min = box.getQueueSize();
+                minBox = box;
+            }
+        }
+        return minBox;
+    }
+}
