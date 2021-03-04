@@ -10,13 +10,13 @@ public class CashBox {
         id = cashBoxCounter++;
     }
 
-    public void serveBuyer(Buyer buyer) {
+    public void serveCustomer(Customer Customer) {
         increaseQueSize();
 
         synchronized (this) {
-            System.out.printf("CashBox #%s serves buyer %s\n", id, buyer.getBuyerName());
-            for (String good : buyer.getShoppingList()) {
-                System.out.printf("Buyer %s buys %s\n", buyer.getBuyerName(), good);
+            System.out.printf("CashBox #%s serves Customer %s\n", id, Customer.getcustomerName());
+            for (String good : Customer.getShoppingList()) {
+                System.out.printf("Customer %s buys %s\n", Customer.getcustomerName(), good);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -25,8 +25,8 @@ public class CashBox {
             }
             synchronized (lock) {
                 queueSize--;
-                System.out.println("Buyer " + buyer.getBuyerName() + " is served. CashBox #" + id + " has "
-                        + queueSize + " buyers left in the queue");
+                System.out.println("Customer " + Customer.getcustomerName() + " is served. CashBox #" + id + " has "
+                        + queueSize + " Customers left in the queue");
             }
         }
     }
