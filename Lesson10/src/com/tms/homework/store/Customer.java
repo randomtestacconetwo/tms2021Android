@@ -26,7 +26,7 @@ public class Customer extends Thread {
         return shoppingList;
     }
 
-    public String getcustomerName() {
+    public String getCustomerName() {
         return customerName;
     }
 }
